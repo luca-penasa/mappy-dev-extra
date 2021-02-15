@@ -3,7 +3,7 @@ from qgis.core import QgsProcessingProvider
 
 from .map_construction import MapConstructionProcessingAlgorithm
 from .map_autostyle import MapAutoStyleProcessingAlgorithm
-
+from .map_clip_dangles import MapClipDanglesProcessingAlgorithm
 
 class Provider(QgsProcessingProvider):
 
@@ -11,6 +11,7 @@ class Provider(QgsProcessingProvider):
     def loadAlgorithms(self, *args, **kwargs):
         self.addAlgorithm(MapConstructionProcessingAlgorithm())
         self.addAlgorithm(MapAutoStyleProcessingAlgorithm())
+        self.addAlgorithm(MapClipDanglesProcessingAlgorithm())
         # add additional algorithms here
         # self.addAlgorithm(MyOtherAlgorithm())
 
