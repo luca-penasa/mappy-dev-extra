@@ -2,119 +2,148 @@
 <Option type="Map">
   <Option name="children" type="Map">
     <Option name="model:clean_lines_1" type="Map">
-      <Option name="active" value="true" type="bool"/>
+      <Option name="active" type="bool" value="true"/>
       <Option name="alg_config"/>
-      <Option name="alg_id" value="model:clean_lines" type="QString"/>
-      <Option name="color" value="" type="QString"/>
+      <Option name="alg_id" type="QString" value="model:clean_lines"/>
+      <Option name="color" type="QString" value=""/>
       <Option name="comment" type="Map">
-        <Option name="color" value="" type="QString"/>
-        <Option name="component_description" value="" type="QString"/>
-        <Option name="component_height" value="60" type="double"/>
-        <Option name="component_pos_x" value="874.1298701298701" type="double"/>
-        <Option name="component_pos_y" value="284.8181818181818" type="double"/>
-        <Option name="component_width" value="100" type="double"/>
-        <Option name="outputs_collapsed" value="true" type="bool"/>
-        <Option name="parameters_collapsed" value="true" type="bool"/>
+        <Option name="color" type="QString" value=""/>
+        <Option name="component_description" type="QString" value=""/>
+        <Option name="component_height" type="double" value="60"/>
+        <Option name="component_pos_x" type="double" value="874.1298701298701"/>
+        <Option name="component_pos_y" type="double" value="284.8181818181818"/>
+        <Option name="component_width" type="double" value="100"/>
+        <Option name="outputs_collapsed" type="bool" value="true"/>
+        <Option name="parameters_collapsed" type="bool" value="true"/>
       </Option>
-      <Option name="component_description" value="clean_lines" type="QString"/>
-      <Option name="component_height" value="30" type="double"/>
-      <Option name="component_pos_x" value="674.1298701298701" type="double"/>
-      <Option name="component_pos_y" value="329.8181818181818" type="double"/>
-      <Option name="component_width" value="200" type="double"/>
+      <Option name="component_description" type="QString" value="clean_lines"/>
+      <Option name="component_height" type="double" value="30"/>
+      <Option name="component_pos_x" type="double" value="722.7532467532468"/>
+      <Option name="component_pos_y" type="double" value="362.23376623376623"/>
+      <Option name="component_width" type="double" value="200"/>
       <Option name="dependencies"/>
-      <Option name="id" value="model:clean_lines_1" type="QString"/>
+      <Option name="id" type="QString" value="model:clean_lines_1"/>
       <Option name="outputs" type="Map">
         <Option name="polygons_lines" type="Map">
-          <Option name="child_id" value="model:clean_lines_1" type="QString"/>
-          <Option name="color" value="" type="QString"/>
+          <Option name="child_id" type="QString" value="model:clean_lines_1"/>
+          <Option name="color" type="QString" value=""/>
           <Option name="comment" type="Map">
-            <Option name="color" value="" type="QString"/>
-            <Option name="component_description" value="" type="QString"/>
-            <Option name="component_height" value="60" type="double"/>
-            <Option name="component_pos_x" value="0" type="double"/>
-            <Option name="component_pos_y" value="0" type="double"/>
-            <Option name="component_width" value="100" type="double"/>
-            <Option name="outputs_collapsed" value="true" type="bool"/>
-            <Option name="parameters_collapsed" value="true" type="bool"/>
+            <Option name="color" type="QString" value=""/>
+            <Option name="component_description" type="QString" value=""/>
+            <Option name="component_height" type="double" value="60"/>
+            <Option name="component_pos_x" type="double" value="0"/>
+            <Option name="component_pos_y" type="double" value="0"/>
+            <Option name="component_width" type="double" value="100"/>
+            <Option name="outputs_collapsed" type="bool" value="true"/>
+            <Option name="parameters_collapsed" type="bool" value="true"/>
           </Option>
-          <Option name="component_description" value="polygons_lines" type="QString"/>
-          <Option name="component_height" value="30" type="double"/>
-          <Option name="component_pos_x" value="832.987012987013" type="double"/>
-          <Option name="component_pos_y" value="459.5974025974026" type="double"/>
-          <Option name="component_width" value="200" type="double"/>
+          <Option name="component_description" type="QString" value="polygons_lines"/>
+          <Option name="component_height" type="double" value="30"/>
+          <Option name="component_pos_x" type="double" value="832.987012987013"/>
+          <Option name="component_pos_y" type="double" value="459.5974025974026"/>
+          <Option name="component_width" type="double" value="200"/>
           <Option name="default_value" type="invalid"/>
-          <Option name="mandatory" value="false" type="bool"/>
-          <Option name="name" value="polygons_lines" type="QString"/>
-          <Option name="output_name" value="native:deletecolumn_1:output" type="QString"/>
-          <Option name="outputs_collapsed" value="true" type="bool"/>
-          <Option name="parameters_collapsed" value="true" type="bool"/>
+          <Option name="mandatory" type="bool" value="false"/>
+          <Option name="name" type="QString" value="polygons_lines"/>
+          <Option name="output_name" type="QString" value="native:deletecolumn_1:output"/>
+          <Option name="outputs_collapsed" type="bool" value="true"/>
+          <Option name="parameters_collapsed" type="bool" value="true"/>
         </Option>
       </Option>
-      <Option name="outputs_collapsed" value="true" type="bool"/>
-      <Option name="parameters_collapsed" value="true" type="bool"/>
+      <Option name="outputs_collapsed" type="bool" value="true"/>
+      <Option name="parameters_collapsed" type="bool" value="true"/>
       <Option name="params" type="Map">
-        <Option name="ExtensionDistance" type="List">
-          <Option type="Map">
-            <Option name="source" value="2" type="int"/>
-            <Option name="static_value" value="0.001" type="double"/>
-          </Option>
-        </Option>
         <Option name="inlines" type="List">
           <Option type="Map">
-            <Option name="child_id" value="native:polygonstolines_1" type="QString"/>
-            <Option name="output_name" value="OUTPUT" type="QString"/>
-            <Option name="source" value="1" type="int"/>
+            <Option name="child_id" type="QString" value="native:explodelines_1"/>
+            <Option name="output_name" type="QString" value="OUTPUT"/>
+            <Option name="source" type="int" value="1"/>
+          </Option>
+        </Option>
+      </Option>
+    </Option>
+    <Option name="native:explodelines_1" type="Map">
+      <Option name="active" type="bool" value="true"/>
+      <Option name="alg_config"/>
+      <Option name="alg_id" type="QString" value="native:explodelines"/>
+      <Option name="color" type="QString" value=""/>
+      <Option name="comment" type="Map">
+        <Option name="color" type="QString" value=""/>
+        <Option name="component_description" type="QString" value=""/>
+        <Option name="component_height" type="double" value="60"/>
+        <Option name="component_pos_x" type="double" value="1094.1298701298701"/>
+        <Option name="component_pos_y" type="double" value="384.8181818181818"/>
+        <Option name="component_width" type="double" value="100"/>
+        <Option name="outputs_collapsed" type="bool" value="true"/>
+        <Option name="parameters_collapsed" type="bool" value="true"/>
+      </Option>
+      <Option name="component_description" type="QString" value="Explode lines"/>
+      <Option name="component_height" type="double" value="30"/>
+      <Option name="component_pos_x" type="double" value="616.1038961038962"/>
+      <Option name="component_pos_y" type="double" value="268.987012987013"/>
+      <Option name="component_width" type="double" value="200"/>
+      <Option name="dependencies"/>
+      <Option name="id" type="QString" value="native:explodelines_1"/>
+      <Option name="outputs"/>
+      <Option name="outputs_collapsed" type="bool" value="true"/>
+      <Option name="parameters_collapsed" type="bool" value="true"/>
+      <Option name="params" type="Map">
+        <Option name="INPUT" type="List">
+          <Option type="Map">
+            <Option name="child_id" type="QString" value="native:polygonstolines_1"/>
+            <Option name="output_name" type="QString" value="OUTPUT"/>
+            <Option name="source" type="int" value="1"/>
           </Option>
         </Option>
       </Option>
     </Option>
     <Option name="native:polygonstolines_1" type="Map">
-      <Option name="active" value="true" type="bool"/>
+      <Option name="active" type="bool" value="true"/>
       <Option name="alg_config"/>
-      <Option name="alg_id" value="native:polygonstolines" type="QString"/>
-      <Option name="color" value="" type="QString"/>
+      <Option name="alg_id" type="QString" value="native:polygonstolines"/>
+      <Option name="color" type="QString" value=""/>
       <Option name="comment" type="Map">
-        <Option name="color" value="" type="QString"/>
-        <Option name="component_description" value="" type="QString"/>
-        <Option name="component_height" value="60" type="double"/>
-        <Option name="component_pos_x" value="320" type="double"/>
-        <Option name="component_pos_y" value="115" type="double"/>
-        <Option name="component_width" value="100" type="double"/>
-        <Option name="outputs_collapsed" value="true" type="bool"/>
-        <Option name="parameters_collapsed" value="true" type="bool"/>
+        <Option name="color" type="QString" value=""/>
+        <Option name="component_description" type="QString" value=""/>
+        <Option name="component_height" type="double" value="60"/>
+        <Option name="component_pos_x" type="double" value="320"/>
+        <Option name="component_pos_y" type="double" value="115"/>
+        <Option name="component_width" type="double" value="100"/>
+        <Option name="outputs_collapsed" type="bool" value="true"/>
+        <Option name="parameters_collapsed" type="bool" value="true"/>
       </Option>
-      <Option name="component_description" value="Polygons to lines" type="QString"/>
-      <Option name="component_height" value="30" type="double"/>
-      <Option name="component_pos_x" value="454.12987012987014" type="double"/>
-      <Option name="component_pos_y" value="229.8181818181818" type="double"/>
-      <Option name="component_width" value="200" type="double"/>
+      <Option name="component_description" type="QString" value="Polygons to lines"/>
+      <Option name="component_height" type="double" value="30"/>
+      <Option name="component_pos_x" type="double" value="435.42857142857144"/>
+      <Option name="component_pos_y" type="double" value="206.1298701298701"/>
+      <Option name="component_width" type="double" value="200"/>
       <Option name="dependencies"/>
-      <Option name="id" value="native:polygonstolines_1" type="QString"/>
+      <Option name="id" type="QString" value="native:polygonstolines_1"/>
       <Option name="outputs"/>
-      <Option name="outputs_collapsed" value="true" type="bool"/>
-      <Option name="parameters_collapsed" value="true" type="bool"/>
+      <Option name="outputs_collapsed" type="bool" value="true"/>
+      <Option name="parameters_collapsed" type="bool" value="true"/>
       <Option name="params" type="Map">
         <Option name="INPUT" type="List">
           <Option type="Map">
-            <Option name="parameter_name" value="inpolygons" type="QString"/>
-            <Option name="source" value="0" type="int"/>
+            <Option name="parameter_name" type="QString" value="inpolygons"/>
+            <Option name="source" type="int" value="0"/>
           </Option>
         </Option>
       </Option>
     </Option>
   </Option>
   <Option name="designerParameterValues" type="Map">
-    <Option name="VERBOSE_LOG" value="true" type="bool"/>
-    <Option name="inpolygons" value="Polygons_dc6e6c9b_32a8_48fa_8085_389f75a7f72c" type="QString"/>
+    <Option name="VERBOSE_LOG" type="bool" value="true"/>
+    <Option name="inpolygons" type="QString" value="Polygons_dc6e6c9b_32a8_48fa_8085_389f75a7f72c"/>
     <Option name="model:clean_lines_1:polygons_lines" type="QgsProcessingOutputLayerDefinition">
       <Option type="Map">
         <Option name="create_options" type="Map">
-          <Option name="fileEncoding" value="System" type="QString"/>
+          <Option name="fileEncoding" type="QString" value="System"/>
         </Option>
         <Option name="sink" type="Map">
-          <Option name="active" value="true" type="bool"/>
-          <Option name="type" value="1" type="int"/>
-          <Option name="val" value="TEMPORARY_OUTPUT" type="QString"/>
+          <Option name="active" type="bool" value="true"/>
+          <Option name="type" type="int" value="1"/>
+          <Option name="val" type="QString" value="TEMPORARY_OUTPUT"/>
         </Option>
       </Option>
     </Option>
@@ -122,59 +151,59 @@
   <Option name="groupBoxes"/>
   <Option name="help"/>
   <Option name="modelVariables"/>
-  <Option name="model_group" value="mappy" type="QString"/>
-  <Option name="model_name" value="polygons_to_lines" type="QString"/>
+  <Option name="model_group" type="QString" value="mappy"/>
+  <Option name="model_name" type="QString" value="polygons_to_lines"/>
   <Option name="parameterDefinitions" type="Map">
     <Option name="inpolygons" type="Map">
       <Option name="data_types" type="List">
-        <Option value="2" type="int"/>
+        <Option type="int" value="2"/>
       </Option>
       <Option name="default" type="invalid"/>
       <Option name="defaultGui" type="invalid"/>
-      <Option name="description" value="in_polygons" type="QString"/>
-      <Option name="flags" value="0" type="int"/>
-      <Option name="help" value="" type="QString"/>
+      <Option name="description" type="QString" value="in_polygons"/>
+      <Option name="flags" type="int" value="0"/>
+      <Option name="help" type="QString" value=""/>
       <Option name="metadata"/>
-      <Option name="name" value="inpolygons" type="QString"/>
-      <Option name="parameter_type" value="vector" type="QString"/>
+      <Option name="name" type="QString" value="inpolygons"/>
+      <Option name="parameter_type" type="QString" value="vector"/>
     </Option>
     <Option name="model:clean_lines_1:polygons_lines" type="Map">
-      <Option name="create_by_default" value="true" type="bool"/>
-      <Option name="data_type" value="-1" type="int"/>
+      <Option name="create_by_default" type="bool" value="true"/>
+      <Option name="data_type" type="int" value="-1"/>
       <Option name="default" type="invalid"/>
       <Option name="defaultGui" type="invalid"/>
-      <Option name="description" value="polygons_lines" type="QString"/>
-      <Option name="flags" value="0" type="int"/>
-      <Option name="help" value="" type="QString"/>
+      <Option name="description" type="QString" value="polygons_lines"/>
+      <Option name="flags" type="int" value="0"/>
+      <Option name="help" type="QString" value=""/>
       <Option name="metadata"/>
-      <Option name="name" value="model:clean_lines_1:polygons_lines" type="QString"/>
-      <Option name="parameter_type" value="sink" type="QString"/>
-      <Option name="supports_append" value="true" type="bool"/>
-      <Option name="supports_non_file_outputs" value="true" type="bool"/>
+      <Option name="name" type="QString" value="model:clean_lines_1:polygons_lines"/>
+      <Option name="parameter_type" type="QString" value="sink"/>
+      <Option name="supports_append" type="bool" value="true"/>
+      <Option name="supports_non_file_outputs" type="bool" value="true"/>
     </Option>
   </Option>
   <Option name="parameterOrder"/>
   <Option name="parameters" type="Map">
     <Option name="inpolygons" type="Map">
-      <Option name="color" value="" type="QString"/>
+      <Option name="color" type="QString" value=""/>
       <Option name="comment" type="Map">
-        <Option name="color" value="" type="QString"/>
-        <Option name="component_description" value="" type="QString"/>
-        <Option name="component_height" value="60" type="double"/>
-        <Option name="component_pos_x" value="414.4415584415584" type="double"/>
-        <Option name="component_pos_y" value="98.37662337662337" type="double"/>
-        <Option name="component_width" value="100" type="double"/>
-        <Option name="outputs_collapsed" value="true" type="bool"/>
-        <Option name="parameters_collapsed" value="true" type="bool"/>
+        <Option name="color" type="QString" value=""/>
+        <Option name="component_description" type="QString" value=""/>
+        <Option name="component_height" type="double" value="60"/>
+        <Option name="component_pos_x" type="double" value="414.4415584415584"/>
+        <Option name="component_pos_y" type="double" value="98.37662337662337"/>
+        <Option name="component_width" type="double" value="100"/>
+        <Option name="outputs_collapsed" type="bool" value="true"/>
+        <Option name="parameters_collapsed" type="bool" value="true"/>
       </Option>
-      <Option name="component_description" value="inpolygons" type="QString"/>
-      <Option name="component_height" value="30" type="double"/>
-      <Option name="component_pos_x" value="182.02597402597402" type="double"/>
-      <Option name="component_pos_y" value="115.94805194805194" type="double"/>
-      <Option name="component_width" value="200" type="double"/>
-      <Option name="name" value="inpolygons" type="QString"/>
-      <Option name="outputs_collapsed" value="true" type="bool"/>
-      <Option name="parameters_collapsed" value="true" type="bool"/>
+      <Option name="component_description" type="QString" value="inpolygons"/>
+      <Option name="component_height" type="double" value="30"/>
+      <Option name="component_pos_x" type="double" value="182.02597402597402"/>
+      <Option name="component_pos_y" type="double" value="115.94805194805194"/>
+      <Option name="component_width" type="double" value="200"/>
+      <Option name="name" type="QString" value="inpolygons"/>
+      <Option name="outputs_collapsed" type="bool" value="true"/>
+      <Option name="parameters_collapsed" type="bool" value="true"/>
     </Option>
   </Option>
 </Option>
