@@ -11,136 +11,132 @@
 ***************************************************************************
 """
 
-from qgis import processing
 from qgis.PyQt.QtCore import QCoreApplication
-from qgis._core import Qgis, QgsProcessingParameterBoolean, QgsProcessingUtils
-from qgis.gui import QgsMessageBar
+from qgis.core import QgsSpatialIndex
 from qgis.core import (QgsProcessing,
                        QgsProcessingException,
                        QgsProcessingAlgorithm,
                        QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink,
-                       QgsProcessingParameterField)
+                       QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink)
 
-
-from qgis.utils import iface
 
 from qgis.PyQt.QtGui import QIcon
 
-from ..utils import resetCategoriesIfNeeded
 
-
-class MapClipDanglesProcessingAlgorithm(QgsProcessingAlgorithm):
+class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
     """
     Helper to assign categorized style to a polygonal layer
     """
 
-    IN_LINES = "IN_CONTACTS"
-    IN_POLYGONS = "IN_POLYGONS"
-    CLIP_OUTLINE = "CLIP_OUTLINE"
-    OUTPUT = "OUTPUT"
+    IN_SEGMENTS = "IN_SEGMENTS"
+    THRESHOLD ="THRESHOLD"
+    OUTPUT= "OUTPUT"
 
     def icon(self):
-        return QIcon(':/plugins/qgismappy/mapstyle.png')
+        return QIcon()
 
     def tr(self, string):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return MapClipDanglesProcessingAlgorithm()
+        return RemoveDuplicateSegmentsProcessingAlgorithm()
 
     def name(self):
-        return 'clipdangles'
+        return 'removeduplicatedsegments'
 
     def displayName(self):
-        return self.tr('Remove Dangles')
+        return self.tr('Remove Duplicated Segments')
 
     def group(self):
-        return self.tr('Mapping')
+        return self.tr('Utils')
 
     def groupId(self):
-        return 'mapping'
+        return 'utils'
 
 
 
     def shortHelpString(self):
-        return self.tr("""Clean input contacts layer to remove overshooted lines""")
+        return self.tr("""Remove duplicated segments using a threshold""")
 
 
     def initAlgorithm(self, config=None):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.IN_LINES,
-                self.tr('Input Contacts'),
+                self.IN_SEGMENTS,
+                self.tr('Input Segments)'),
                 [QgsProcessing.TypeVectorLine]
             )
         )
 
-
         self.addParameter(
-            QgsProcessingParameterFeatureSource(
-                self.IN_POLYGONS,
-                self.tr('Input Polygons'),
-                [QgsProcessing.TypeVectorPolygon]
+            QgsProcessingParameterDistance(
+                self.THRESHOLD,
+                self.tr('Precision'),
+                parentParameterName=self.IN_SEGMENTS,
+                defaultValue = 1e-6
             )
         )
-
-        self.addParameter(
-            QgsProcessingParameterBoolean(
-                self.CLIP_OUTLINE, self.tr("Clip outline"),
-                defaultValue=True
-            ))
 
         self.addParameter(
             QgsProcessingParameterFeatureSink(
                 self.OUTPUT,
-                self.tr('Cleaned Contacts')
+                self.tr('Cleaned segments')
             )
         )
+
+    def equal_segments(self, seg1, seg2, threshold=1e-6):
+        s1_s, s1_e = seg1.vertices()
+        s2_s, s2_e = seg2.vertices()
+
+        if s1_s.distance(s2_s) < threshold and s1_e.distance(s2_e) < threshold:
+            return True
+
+        if s1_s.distance(s2_e) < threshold and s1_e.distance(s2_s) < threshold:
+            return True
+        else:
+            return False
 
 
 
     def processAlgorithm(self, parameters, context, feedback):
-        polygons_layer = self.parameterAsLayer(
+        segments_layer = self.parameterAsLayer(
             parameters,
-            self.IN_POLYGONS,
-            context
-        )
-
-        lines_layer = self.parameterAsLayer(
-            parameters,
-            self.IN_LINES,
+            self.IN_SEGMENTS,
             context
         )
 
 
-        clip_outline = self.parameterAsBool(parameters, self.CLIP_OUTLINE, context)
+        t = self.parameterAsDouble(parameters, self.THRESHOLD, context)
 
-        if clip_outline:
+        index = QgsSpatialIndex()  # Spatial index
 
-            dpars = {'INPUT': polygons_layer, 'FIELD': [], 'OUTPUT': 'TEMPORARY_OUTPUT'}
-            dissolved =  processing.run("native:dissolve", dpars, context=context, feedback=feedback, is_child_algorithm=True)["OUTPUT"]
-            # print(dissolved)
-            #
-            # print(dissolved.featureCount())
+        index.addFeatures(segments_layer.getFeatures())
 
+        todel = []
+        for ln in segments_layer.getFeatures():
+            index.deleteFeature(ln)
 
-            ipars = {'INPUT': lines_layer, 'OVERLAY': dissolved, 'INPUT_FIELDS': [], 'OVERLAY_FIELDS': [],
-                    'OVERLAY_FIELDS_PREFIX': '', 'OUTPUT': 'TEMPORARY_OUTPUT'}
+            cands = index.intersects(ln.geometry().boundingBox())
 
-            cont = processing.run("native:intersection", ipars, context=context, feedback=feedback, is_child_algorithm=False)["OUTPUT"]
-            # print(cont)
-            # print(cont.featureCount())
+            ln1 = ln.geometry()
+            for ca in cands:
+                totest = segments_layer.getFeature(ca)
+                ln2 = totest.geometry()
+
+                are_equal = self.equal_segments(ln1, ln2, t)
+                if are_equal:
+                    index.deleteFeature(totest)
+                    todel.append(ca)
 
 
         (sink, dest_id) = self.parameterAsSink(
             parameters,
             self.OUTPUT,
             context,
-            lines_layer.fields(),  # QgsFields() for an empty fields list or source_lines.fields()
+            segments_layer.fields(),  # QgsFields() for an empty fields list or source_lines.fields()
             QgsWkbTypes.MultiLineString,
-            lines_layer.sourceCrs()
+            segments_layer.sourceCrs()
         )
 
 
@@ -150,11 +146,9 @@ class MapClipDanglesProcessingAlgorithm(QgsProcessingAlgorithm):
         print("going to add the features")
 
 
-        for feature in cont.getFeatures():
-            print("add feature")
-            sink.addFeature(feature, QgsFeatureSink.FastInsert)
-
-
+        for feature in segments_layer.getFeatures():
+            if feature.id() not in todel:
+                sink.addFeature(feature, QgsFeatureSink.FastInsert)
 
 
         return {"OUTPUT": dest_id}

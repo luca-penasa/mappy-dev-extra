@@ -39,7 +39,7 @@ class MapAutoStyleProcessingAlgorithm(QgsProcessingAlgorithm):
         return QIcon(':/plugins/qgismappy/mapstyle.png')
 
 
-    IN_POLYGONS = "IN_POLYGONS"
+    IN_LAYER = "IN_LAYER"
     CAT_FIELD = "CAT_FIELD"
     STYLE_UNASSIGNED = "STYLE_UNASSIGNED"
 
@@ -70,9 +70,9 @@ class MapAutoStyleProcessingAlgorithm(QgsProcessingAlgorithm):
     def initAlgorithm(self, config=None):
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.IN_POLYGONS,
+                self.IN_LAYER,
                 self.tr('Input Polygons'),
-                [QgsProcessing.TypeVectorPolygon]
+                [QgsProcessing.TypeVectorPolygon, QgsProcessing.TypeVectorLine]
             )
         )
 
@@ -80,7 +80,7 @@ class MapAutoStyleProcessingAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterField(
                 self.CAT_FIELD,
                 self.tr('Units field in point layer'),
-                parentLayerParameterName = self.IN_POLYGONS,
+                parentLayerParameterName = self.IN_LAYER,
                 optional=False
             )
         )
@@ -97,7 +97,7 @@ class MapAutoStyleProcessingAlgorithm(QgsProcessingAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         polygons_layer = self.parameterAsLayer(
             parameters,
-            self.IN_POLYGONS,
+            self.IN_LAYER,
             context
         )
 

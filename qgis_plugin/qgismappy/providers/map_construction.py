@@ -260,8 +260,8 @@ class MapConstructionProcessingAlgorithm(QgsProcessingAlgorithm):
         for feature in joined_layer["OUTPUT"].getFeatures():
             sink.addFeature(feature, QgsFeatureSink.FastInsert)
 
-        outlayer = self.parameterAsLayer(parameters, self.OUTPUT, context)
-        feedback.pushInfo("->"+str(outlayer))
+        # outlayer = self.parameterAsLayer(parameters, self.OUTPUT, context)
+        # feedback.pushInfo("->"+str(outlayer))
 
         # from qgismappy.qgismappy_dockwidget import resetCategoriesIfNeeded
         # resetCategoriesIfNeeded(sink, field)
