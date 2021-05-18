@@ -32,7 +32,7 @@ from qgis.core import QgsApplication
 
 
 
-from .providers.provider import Provider
+from .providers.MappyProvider import Provider
 import os.path
 
 
@@ -170,7 +170,7 @@ class Mappy:
     def initGui(self):
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/qgismappy/icon.png'
+        icon_path = ':/plugins/qgismappy/icons/icon.png'
         self.add_action(
             icon_path,
             text=self.tr(u'Mappy'),

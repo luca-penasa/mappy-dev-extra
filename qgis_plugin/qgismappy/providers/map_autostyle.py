@@ -1,25 +1,7 @@
-# -*- coding: utf-8 -*-
-
-"""
-***************************************************************************
-*                                                                         *
-*   This program is free software; you can redistribute it and/or modify  *
-*   it under the terms of the GNU General Public License as published by  *
-*   the Free Software Foundation; either version 2 of the License, or     *
-*   (at your option) any later version.                                   *
-*                                                                         *
-***************************************************************************
-"""
-
-from qgis import processing
 from qgis.PyQt.QtCore import QCoreApplication
-from qgis._core import Qgis, QgsProcessingParameterBoolean, QgsProcessingUtils
-from qgis.gui import QgsMessageBar
+from qgis.core import QgsProcessingParameterBoolean
 from qgis.core import (QgsProcessing,
-                       QgsProcessingException,
-                       QgsProcessingAlgorithm,
                        QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink,
                        QgsProcessingParameterField)
 
 
@@ -28,15 +10,16 @@ from qgis.utils import iface
 from qgis.PyQt.QtGui import QIcon
 
 from ..utils import resetCategoriesIfNeeded
+from .MappyProcessingAlgorithm import MappyProcessingAlgorithm
 
 
-class MapAutoStyleProcessingAlgorithm(QgsProcessingAlgorithm):
+class MapAutoStyleProcessingAlgorithm(MappyProcessingAlgorithm):
     """
     Helper to assign categorized style to a polygonal layer
     """
 
     def icon(self):
-        return QIcon(':/plugins/qgismappy/mapstyle.png')
+        return QIcon(':/plugins/qgismappy/icons/mapstyle.png')
 
 
     IN_LAYER = "IN_LAYER"

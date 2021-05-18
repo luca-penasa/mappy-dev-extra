@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/plugins/qgismappy" >
-        <file>icon.png</file>
-        <file>mapconstruction.png</file>
-        <file>mapstyle.png</file>
+        <file>icons/icon.png</file>
+        <file>icons/mapconstruction.png</file>
+        <file>icons/mapstyle.png</file>
+        <file>icons/dangles.png</file>
     </qresource>
 </RCC>

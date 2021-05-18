@@ -1,51 +1,24 @@
-# -*- coding: utf-8 -*-
-
-"""
-***************************************************************************
-*                                                                         *
-*   This program is free software; you can redistribute it and/or modify  *
-*   it under the terms of the GNU General Public License as published by  *
-*   the Free Software Foundation; either version 2 of the License, or     *
-*   (at your option) any later version.                                   *
-*                                                                         *
-***************************************************************************
-"""
-
 from qgis import processing
-from qgis.PyQt.QtCore import QCoreApplication
-from qgis.core import Qgis, QgsProcessingParameterBoolean, QgsProcessingUtils, QgsApplication
-from qgis.gui import QgsMessageBar
+from qgis.core import QgsProcessingParameterBoolean, QgsProcessingUtils, QgsApplication
 from qgis.core import (QgsProcessing,
                        QgsProcessingException,
-                       QgsProcessingAlgorithm,
                        QgsProcessingParameterFeatureSource,
-                       QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink,
-                       QgsProcessingParameterField)
+                       QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink)
 
 
-from qgis.utils import iface
 
 from qgis.PyQt.QtGui import QIcon
 
-from ..utils import resetCategoriesIfNeeded
 
+from .MappyProcessingAlgorithm import MappyProcessingAlgorithm
 
-class MapConstructionProcessingAlgorithm(QgsProcessingAlgorithm):
+class MapConstructionProcessingAlgorithm(MappyProcessingAlgorithm):
     """
-    This is an example algorithm that takes a vector layer and
-    creates a new identical one.
-
-    It is meant to be used as an example of how to create your own
-    algorithms and explain methods and variables used to do it. An
-    algorithm like this will be available in all elements, and there
-    is not need for additional work.
-
-    All Processing algorithms should extend the QgsProcessingAlgorithm
-    class.
+    Generate a new polygonal map from lines and points
     """
 
     def icon(self):
-        return QIcon(':/plugins/qgismappy/mapconstruction.png')
+        return QIcon(':/plugins/qgismappy/icons/mapconstruction.png')
 
     # Constants used to refer to parameters and outputs. They will be
     # used when calling the algorithm from another algorithm, or when
@@ -59,11 +32,7 @@ class MapConstructionProcessingAlgorithm(QgsProcessingAlgorithm):
     DROP_UNMATCHED = "DROP_UNMATCHED"
     # MAIN_FIELD = "MAIN_FIELD"
 
-    def tr(self, string):
-        """
-        Returns a translatable string with the self.tr() function.
-        """
-        return QCoreApplication.translate('Processing', string)
+
 
     def createInstance(self):
         return MapConstructionProcessingAlgorithm()
@@ -72,7 +41,7 @@ class MapConstructionProcessingAlgorithm(QgsProcessingAlgorithm):
         return 'mapconstruction'
 
     def displayName(self):
-         return self.tr('Map Construction')
+         return self.tr('Map Construction (lines and points to polygons)')
 
     def group(self):
         return self.tr('Mapping')

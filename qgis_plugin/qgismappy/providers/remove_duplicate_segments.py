@@ -12,25 +12,23 @@
 """
 
 from qgis.PyQt.QtCore import QCoreApplication
-from qgis.core import QgsSpatialIndex
+from qgis.PyQt.QtGui import QIcon
 from qgis.core import (QgsProcessing,
                        QgsProcessingException,
-                       QgsProcessingAlgorithm,
                        QgsProcessingParameterFeatureSource,
                        QgsProcessingParameterFeatureSink, QgsProcessingParameterDistance, QgsWkbTypes, QgsFeatureSink)
+from qgis.core import QgsSpatialIndex
+
+from .MappyProcessingAlgorithm import MappyProcessingAlgorithm
 
 
-from qgis.PyQt.QtGui import QIcon
-
-
-class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
+class RemoveDuplicateSegmentsProcessingAlgorithm(MappyProcessingAlgorithm):
     """
-    Helper to assign categorized style to a polygonal layer
+    Helper to remove duplicated segments from a line layer
     """
-
     IN_SEGMENTS = "IN_SEGMENTS"
-    THRESHOLD ="THRESHOLD"
-    OUTPUT= "OUTPUT"
+    THRESHOLD = "THRESHOLD"
+    OUTPUT = "OUTPUT"
 
     def icon(self):
         return QIcon()
@@ -53,11 +51,8 @@ class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
     def groupId(self):
         return 'utils'
 
-
-
     def shortHelpString(self):
         return self.tr("""Remove duplicated segments using a threshold""")
-
 
     def initAlgorithm(self, config=None):
 
@@ -74,7 +69,7 @@ class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
                 self.THRESHOLD,
                 self.tr('Precision'),
                 parentParameterName=self.IN_SEGMENTS,
-                defaultValue = 1e-6
+                defaultValue=1e-6
             )
         )
 
@@ -97,15 +92,12 @@ class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
         else:
             return False
 
-
-
     def processAlgorithm(self, parameters, context, feedback):
         segments_layer = self.parameterAsLayer(
             parameters,
             self.IN_SEGMENTS,
             context
         )
-
 
         t = self.parameterAsDouble(parameters, self.THRESHOLD, context)
 
@@ -129,7 +121,6 @@ class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
                     index.deleteFeature(totest)
                     todel.append(ca)
 
-
         (sink, dest_id) = self.parameterAsSink(
             parameters,
             self.OUTPUT,
@@ -139,17 +130,11 @@ class RemoveDuplicateSegmentsProcessingAlgorithm(QgsProcessingAlgorithm):
             segments_layer.sourceCrs()
         )
 
-
         if sink is None:
             raise QgsProcessingException(self.invalidSinkError(parameters, self.OUTPUT))
-
-        print("going to add the features")
-
 
         for feature in segments_layer.getFeatures():
             if feature.id() not in todel:
                 sink.addFeature(feature, QgsFeatureSink.FastInsert)
 
-
         return {"OUTPUT": dest_id}
-

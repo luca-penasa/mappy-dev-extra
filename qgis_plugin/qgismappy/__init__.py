@@ -23,34 +23,34 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
-import os
-import sys
-
-path = os.path.dirname(os.path.abspath(__file__))
-
-if os.path.exists(os.path.join(path, "mappy")): #  in the package
-    sys.path.append(path)
-    sys.path.append(os.path.join(path, "external"))
-
-
-else:  # we are in the dev folder
-    fullpath = path + " /../../"
-    fullpath = os.path.abspath(fullpath)
-
-    ext_path = os.path.join(fullpath, "external")
-
-    if fullpath not in sys.path:
-        # print(" adding the path")
-        sys.path.insert(0, fullpath)
-
-    if ext_path not in sys.path:
-        # print(" adding the path")
-        sys.path.insert(0, ext_path)
-
-try:
-    import mappy
-except:
-    raise ImportError("Cannot import mappy. This should not happen")
+# import os
+# import sys
+#
+# path = os.path.dirname(os.path.abspath(__file__))
+#
+# if os.path.exists(os.path.join(path, "mappy")): #  in the package
+#     sys.path.append(path)
+#     sys.path.append(os.path.join(path, "external"))
+#
+#
+# else:  # we are in the dev folder
+#     fullpath = path + " /../../"
+#     fullpath = os.path.abspath(fullpath)
+#
+#     ext_path = os.path.join(fullpath, "external")
+#
+#     if fullpath not in sys.path:
+#         # print(" adding the path")
+#         sys.path.insert(0, fullpath)
+#
+#     if ext_path not in sys.path:
+#         # print(" adding the path")
+#         sys.path.insert(0, ext_path)
+#
+# try:
+#     import mappy
+# except:
+#     raise ImportError("Cannot import mappy. This should not happen")
 
 
 # noinspection PyPep8Naming
